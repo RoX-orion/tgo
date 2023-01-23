@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-backtop :right="100" :bottom="100" />
+    <el-backtop :right="50" :bottom="50" />
     <nav-bar/>
     <app-main/>
   </div>
