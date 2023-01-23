@@ -26,7 +26,7 @@ interface Issue {
   summary: string;
   date: Date;
   platform?: string;
-  type: 'bug' | 'tip';
+  type: 'Bug' | 'Tip';
   state: string;
 }
 

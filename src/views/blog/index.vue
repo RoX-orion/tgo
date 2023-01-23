@@ -70,7 +70,7 @@ const list = reactive([
 }
 
 .blog-card-wrapper {
-  margin: 30px 10px;
+  margin: 70px 10px;
   cursor: pointer;
 }
 </style>

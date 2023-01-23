@@ -90,6 +90,20 @@ body {
   color: #409eff;
 }
 
+.gray {
+  color: gray;
+}
+
 .flex-row {
   display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-center {
+  text-align: center;
 }

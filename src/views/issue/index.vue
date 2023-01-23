@@ -1,24 +1,18 @@
 <template>
   <div class="container">
     <div class="search-wrapper">
-      <div class="input" @click="searchIssue">
-
-      </div>
+      <input class="input" placeholder="搜索" @click="searchIssue"/>
     </div>
 
     <div class="filter-wrapper flex-row">
-      <div>
-        所有
+      <div class="btn-search">
+        <span>所有</span>
+        <span>Bug</span>
+        <span>建议</span>
       </div>
-      <div>
-        Bug
-      </div>
-      <div>
-        建议
-      </div>
-      <div style="float: right; ">
-        <div>热度</div>
-        <div>时间</div>
+      <div class="btn-sort">
+        <span>热度</span>
+        <span>时间</span>
       </div>
     </div>
 
@@ -43,7 +37,6 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import Issue from "./components/Issue.vue";
-import Footer from "@/layout/components/AppFooter.vue";
 
 const list = reactive<Array<object>>([
   {
@@ -52,7 +45,7 @@ const list = reactive<Array<object>>([
     summary: '对爱情的渴望，对知识的追求，对人类苦难不可遏制的同情，这三种纯洁但无比强烈的感情支配着我的一生。这三种感情就像飓风一样，在深深的苦海上，肆意地把我吹来吹去，吹到濒临绝望的边缘。',
     date: new Date(),
     platform: 'Android',
-    type: 'bug',
+    type: 'Bug',
     state: 'Open'
   },
   {
@@ -61,7 +54,7 @@ const list = reactive<Array<object>>([
     summary: '对爱情的渴望，对知识的追求，对人类苦难不可遏制的同情，这三种纯洁但无比强烈的感情支配着我的一生。这三种感情就像飓风一样，在深深的苦海上，肆意地把我吹来吹去，吹到濒临绝望的边缘。',
     date: new Date(),
     platform: 'Web',
-    type: 'tip',
+    type: 'Tip',
     state: 'Open'
   },
   {
@@ -70,7 +63,7 @@ const list = reactive<Array<object>>([
     summary: '对爱情的渴望，对知识的追求，对人类苦难不可遏制的同情，这三种纯洁但无比强烈的感情支配着我的一生。这三种感情就像飓风一样，在深深的苦海上，肆意地把我吹来吹去，吹到濒临绝望的边缘。',
     date: new Date(),
     platform: 'Android',
-    type: 'bug',
+    type: 'Bug',
     state: 'Open'
   },
   {
@@ -79,7 +72,7 @@ const list = reactive<Array<object>>([
     summary: '对爱情的渴望，对知识的追求，对人类苦难不可遏制的同情，这三种纯洁但无比强烈的感情支配着我的一生。这三种感情就像飓风一样，在深深的苦海上，肆意地把我吹来吹去，吹到濒临绝望的边缘。',
     date: new Date(),
     platform: 'Web',
-    type: 'tip',
+    type: 'Tip',
     state: 'Open'
   },
   {
@@ -88,7 +81,7 @@ const list = reactive<Array<object>>([
     summary: '对爱情的渴望，对知识的追求，对人类苦难不可遏制的同情，这三种纯洁但无比强烈的感情支配着我的一生。这三种感情就像飓风一样，在深深的苦海上，肆意地把我吹来吹去，吹到濒临绝望的边缘。',
     date: new Date(),
     platform: 'Android',
-    type: 'bug',
+    type: 'Bug',
     state: 'Open'
   },
   {
@@ -97,7 +90,7 @@ const list = reactive<Array<object>>([
     summary: '对爱情的渴望，对知识的追求，对人类苦难不可遏制的同情，这三种纯洁但无比强烈的感情支配着我的一生。这三种感情就像飓风一样，在深深的苦海上，肆意地把我吹来吹去，吹到濒临绝望的边缘。',
     date: new Date(),
     platform: 'Android',
-    type: 'bug',
+    type: 'Bug',
     state: 'Open'
   },
   {
@@ -106,7 +99,7 @@ const list = reactive<Array<object>>([
     summary: '对爱情的渴望，对知识的追求，对人类苦难不可遏制的同情，这三种纯洁但无比强烈的感情支配着我的一生。这三种感情就像飓风一样，在深深的苦海上，肆意地把我吹来吹去，吹到濒临绝望的边缘。',
     date: new Date(),
     platform: 'Android',
-    type: 'bug',
+    type: 'Bug',
     state: 'Open'
   },
 ])
@@ -125,47 +118,57 @@ const getIssueList = () => {
 
 <style scoped>
 .container {
-  /*display: flex;*/
-  /*flex-direction: column;*/
-  /*justify-content: center;*/
+  padding: 15px;
 }
 
 .search-wrapper {
   max-width: 550px;
   height: 45px;
-  border: rgba(0, 0, 0, .1) solid 2px;
-  border-radius: 6px;
-  outline: none;
   margin: 20px auto;
 }
 
 .input {
   height: 100%;
-  width: 90%;
+  width: 100%;
+  outline: none;
+  border: rgba(0, 0, 0, .1) solid .12rem;
+  border-radius: 6px;
+  padding: 0 10px;
 }
 
 .input:focus {
-  border: #409eff solid 2px;
+  border: #409eff solid .12rem;
   border-radius: 4px;
 }
 
 .filter-wrapper {
   margin: 0 auto;
   max-width: 550px;
+  justify-content: space-between;
 }
 
-.filter-wrapper div {
-  padding: 5px 10px;
+.filter-wrapper span {
+  font-size: 13px;
+}
+
+.btn-search span {
+  padding-right: 30px;
+}
+
+.btn-sort span {
+  padding-left: 30px;
 }
 
 .issue-wrapper {
-  max-width: 550px;
+  max-width: 570px;
   margin: 0 auto;
 }
 
 .issue {
-  padding: 15px;
+  width: 100%;
   cursor: pointer;
+  margin: 10px 0;
+  padding: 15px;
 }
 
 .issue:hover {
