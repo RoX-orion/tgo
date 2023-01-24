@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="gray">
-      Copyright &copy 2018-2023 Andre Lina. Powered by Andre Lina
+      Copyright &copy 2018-2023 Andre Lina.<br>
+      Powered by Andre Lina.
     </div>
     <div>
       <span>关于</span>
@@ -15,7 +16,7 @@
     </div>
     <div>
       <span>社区</span>
-      <a class="item" href="">Github</a>
+      <a class="item" href="https://github.com/RoX-orion/im" target="_blank">Github</a>
       <a class="item">TelegramX</a>
     </div>
   </div>
@@ -40,5 +41,6 @@
   margin: 10px 0;
   cursor: pointer;
   display: block;
+  text-decoration: none;
 }
 </style>
