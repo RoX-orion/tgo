@@ -64,6 +64,11 @@ const routes = [
     ]
   },
   {
+    path: '/test',
+    name: 'Test',
+    component: () => import('@/views/Test.vue'),
+  },
+  {
     path: "/404",
     component: () => import("@/views/404.vue"),
     meta: { auth: false },

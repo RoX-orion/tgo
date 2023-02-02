@@ -5,6 +5,7 @@ import { resolve } from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  assetsInclude: ["**/*.tgs"],
   resolve: {
     alias: [
       {
@@ -12,5 +13,5 @@ export default defineConfig({
         replacement: resolve(__dirname, './src'),
       }
     ]
-  }
+  },
 })

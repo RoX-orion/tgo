@@ -35,29 +35,30 @@ import AppFooter from "@/layout/components/AppFooter.vue";
 
 <style lang="scss" scoped>
 .container {
-  padding: 15px;
+  padding: 1rem;
 }
 
 .introduction-wrapper {
-  max-width: 850px;
-  height: 340px;
-  margin: 30px auto;
+  max-width: 53rem;
+  height: 21rem;
+  margin: 2rem auto;
 }
 
 .introduction {
-  max-width: 330px;
-  line-height: 30px;
+  max-width: 21rem;
+  line-height: 2rem;
   display: inline-block;
 }
 
 .start {
-  width: 70px;
-  height: 30px;
+  width: 4rem;
+  height: 1.8rem;
   color: white;
   font-weight: 500;
   background-color: #29B6F6 ;
-  padding: 8px 15px;
-  border-radius: 6px;
+  padding: .5rem 1rem;
+  border-radius: .3rem;
+  cursor: pointer;
 }
 
 .telegram-screenshot {
