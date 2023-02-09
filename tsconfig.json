@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "lib": [
+      "ESNext",
+      "DOM",
+      "webworker",
+      "ES2019",
+    ],
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -9,14 +15,28 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
+    "declarationDir": "dist/types",
+    "allowJs": true,
     "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [ "src/*" ]
-    }
+    },
+    "typeRoots": [
+      "./src",
+      "./node_module/@types"
+    ],
+    "types": ["node"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.tgs"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/**/*.tgs"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

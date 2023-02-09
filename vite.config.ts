@@ -1,17 +1,31 @@
 import {defineConfig} from 'vite';
 import vue from '@vitejs/plugin-vue';
-import { resolve } from "path";
+import {resolve} from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
-  assetsInclude: ["**/*.tgs"],
+  server: {
+    host: true, // 监听所有地址
+    port: 8080
+  },
+  plugins: [
+    vue(),
+  ],
+  assetsInclude: ["**/*.tgs", "**/*.wasm"],
   resolve: {
     alias: [
       {
         find: '@',
         replacement: resolve(__dirname, './src'),
       }
-    ]
+    ],
+    extensions: ['.js', '.ts', '.vue']
   },
-})
+  define: {
+    'process.env': {}
+  },
+  build: {
+    outDir: 'build', // 打包文件的输出目录
+    assetsDir: 'static' // 静态资源的存放目录
+  },
+});

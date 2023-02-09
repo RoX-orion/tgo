@@ -249,3 +249,6 @@ export const MAX_UPLOAD_FILEPART_SIZE = 524288;
 export const GROUP_CALL_VOLUME_MULTIPLIER = 100;
 export const GROUP_CALL_DEFAULT_VOLUME = 100 * GROUP_CALL_VOLUME_MULTIPLIER;
 export const GROUP_CALL_THUMB_VIDEO_DISABLED = true;
+
+
+export const authToken = 'auth-token';

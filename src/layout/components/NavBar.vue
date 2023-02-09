@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar-wrapper">
+  <div class="navbar-wrapper flex-row">
     <div class="router-wrapper flex-row">
         <img
           class="avatar"
@@ -14,12 +14,17 @@
         {{route.name}}
       </a>
     </div>
+    <div class="login-wrapper">
+      <a href="https://github.com/login/oauth/authorize?client_id=243ef50beb4293ee5f97&redirect_uri=http://127.0.0.1:8080/github-callback&scope=user">
+        <span style="color: #409eff;">登录</span>
+      </a>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
-import { useRouter } from "vue-router";
+import {computed, onMounted, reactive} from "vue";
+import {useRoute, useRouter} from "vue-router";
 
 const routers = reactive([
   {name: '文档', path: '/document'},
@@ -30,6 +35,7 @@ const routers = reactive([
 ]);
 
 const router = useRouter();
+const route = useRoute();
 const goTo = (path: string) => {
   router.push(path);
 }
@@ -37,8 +43,8 @@ const goTo = (path: string) => {
 
 <style scoped>
 .avatar {
-  padding: 20px;
   cursor: pointer;
+  margin: auto 0;
   display: inline-block;
 }
 .navbar-wrapper {
@@ -54,12 +60,17 @@ const goTo = (path: string) => {
 .router-wrapper a {
   text-decoration: none;
   color: #409eff;
-  padding: 20px 40px;
+  padding: 0 40px;
 }
 
 .route {
   display: inline-block;
   cursor: pointer;
   margin: auto 0;
+  line-height: 1rem;
+}
+
+.login-wrapper {
+  margin: auto 15px;
 }
 </style>

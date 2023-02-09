@@ -116,6 +116,7 @@ class RLottie {
     private onEnded?: (isDestroyed?: boolean) => void,
     private onLoop?: () => void,
   ) {
+    console.log("容器", container);
     this.addContainer(containerId, container, onLoad, params.coords);
     this.initConfig();
     this.initRenderer();
@@ -277,9 +278,9 @@ class RLottie {
         canvas, ctx, onLoad,
       });
     } else {
-      if (!container.isConnected) {
-        throw new Error('[RLottie] Shared canvas is not mounted');
-      }
+      // if (!container.isConnected) {
+      //   throw new Error('[RLottie] Shared canvas is not mounted');
+      // }
 
       const canvas = container;
       const ctx = canvas.getContext('2d')!;
@@ -357,7 +358,6 @@ class RLottie {
 
   private initRenderer() {
     this.workerIndex = cycleRestrict(MAX_WORKERS, ++lastWorkerIndex);
-
     workers[this.workerIndex].request({
       name: 'init',
       args: [

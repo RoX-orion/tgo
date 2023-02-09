@@ -1,8 +1,10 @@
-import { inflate } from 'pako/dist/pako_inflate';
+// import { inflate } from "pako/dist/pako_inflate";
+// import { inflate } from 'pako';
+// console.log('placeholder', this.tgsUrl);
 import createWorkerInterface from '@/util/createWorkerInterface';
 import type { CancellableCallback } from '@/util/WorkerConnector';
 
-import 'script-loader!./rlottie-wasm';
+importScripts('rlottie-wasm.js');
 
 declare const Module: any;
 
@@ -12,6 +14,7 @@ declare function intArrayFromString(str: String): string;
 
 let rLottieApi: Record<string, Function>;
 const rLottieApiPromise = new Promise<void>((resolve) => {
+  console.log("初始化");
   Module.onRuntimeInitialized = () => {
     rLottieApi = {
       init: Module.cwrap('lottie_init', '', []),
@@ -46,6 +49,7 @@ async function init(
   customColor: [number, number, number] | undefined,
   onInit: CancellableCallback,
 ) {
+  console.log('init');
   if (!rLottieApi) {
     await rLottieApiPromise;
   }
@@ -88,6 +92,7 @@ async function changeData(
 }
 
 async function extractJson(tgsUrl: string) {
+  console.log("tgsUrl", tgsUrl);
   const response = await fetch(tgsUrl);
   const contentType = response.headers.get('Content-Type');
 
@@ -97,7 +102,8 @@ async function extractJson(tgsUrl: string) {
   }
 
   const arrayBuffer = await response.arrayBuffer();
-  return inflate(arrayBuffer, { to: 'string' });
+  // return inflate(arrayBuffer, { to: 'string' })
+  return '111';
 }
 
 function calcParams(json: string, isLowPriority: boolean, framesCount: number) {
@@ -116,6 +122,7 @@ function calcParams(json: string, isLowPriority: boolean, framesCount: number) {
 async function renderFrames(
   key: string, frameIndex: number, onProgress: CancellableCallback,
 ) {
+  console.log('render');
   if (!rLottieApi) {
     await rLottieApiPromise;
   }
@@ -165,8 +172,8 @@ function destroy(key: string, isRepeated = false) {
 }
 
 createWorkerInterface({
-  init,
-  changeData,
-  renderFrames,
-  destroy,
+  // init,
+  // changeData,
+  // renderFrames,
+  // destroy,
 });

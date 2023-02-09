@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import {createRouter, createWebHashHistory, createWebHistory} from "vue-router";
 import Layout from '@/layout/index.vue';
 
 const routes = [
@@ -69,6 +69,11 @@ const routes = [
     component: () => import('@/views/Test.vue'),
   },
   {
+    path: '/github-callback',
+    name: 'GithubCallback',
+    component: () => import('@/views/auth/github-callback.vue'),
+  },
+  {
     path: "/404",
     component: () => import("@/views/404.vue"),
     meta: { auth: false },
@@ -79,7 +84,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: routes
 });
 

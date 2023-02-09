@@ -6,7 +6,7 @@
       :tgsUrl=LOCAL_TGS_URLS.MonkeyIdle
       :playSegment={SEGMENT_COVER_EYES}
       noLoop
-    />
+     shared-canvas=""/>
   </div>
 
 </template>
@@ -15,6 +15,7 @@
 import AnimatedSticker from "@/components/AnimatedSticker.vue";
 import { LOCAL_TGS_URLS } from '@/assets/tgs/animatedAssets';
 const SEGMENT_COVER_EYES: [number, number] = [0, 50];
+
 </script>
 
 <style scoped>
