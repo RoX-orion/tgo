@@ -1,3 +1,5 @@
+declare module '*.tgs';
+
 type AnyLiteral = Record<string, any>;
 
 type NoneToVoidFunction = () => void;

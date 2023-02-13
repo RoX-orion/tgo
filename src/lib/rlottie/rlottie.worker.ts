@@ -1,12 +1,8 @@
-// import { inflate } from "pako/dist/pako_inflate";
-// import { inflate } from 'pako';
-// console.log('placeholder', this.tgsUrl);
+import { inflate } from "pako/dist/pako_inflate";
 import createWorkerInterface from '@/util/createWorkerInterface';
 import type { CancellableCallback } from '@/util/WorkerConnector';
 
-importScripts('rlottie-wasm.js');
-
-declare const Module: any;
+import { Module } from './rlottie-wasm';
 
 declare function allocate(...args: any[]): string;
 
@@ -14,7 +10,6 @@ declare function intArrayFromString(str: String): string;
 
 let rLottieApi: Record<string, Function>;
 const rLottieApiPromise = new Promise<void>((resolve) => {
-  console.log("初始化");
   Module.onRuntimeInitialized = () => {
     rLottieApi = {
       init: Module.cwrap('lottie_init', '', []),
@@ -49,13 +44,12 @@ async function init(
   customColor: [number, number, number] | undefined,
   onInit: CancellableCallback,
 ) {
-  console.log('init');
   if (!rLottieApi) {
     await rLottieApiPromise;
   }
 
   const json = await extractJson(tgsUrl);
-  const stringOnWasmHeap = allocate(intArrayFromString(json), 'i8', 0);
+  const stringOnWasmHeap = Module.allocate(Module.intArrayFromString(json), 'i8', 0);
   const handle = rLottieApi.init();
   const framesCount = rLottieApi.loadFromData(handle, stringOnWasmHeap);
   rLottieApi.resize(handle, imgSize, imgSize);
@@ -92,7 +86,6 @@ async function changeData(
 }
 
 async function extractJson(tgsUrl: string) {
-  console.log("tgsUrl", tgsUrl);
   const response = await fetch(tgsUrl);
   const contentType = response.headers.get('Content-Type');
 
@@ -102,8 +95,7 @@ async function extractJson(tgsUrl: string) {
   }
 
   const arrayBuffer = await response.arrayBuffer();
-  // return inflate(arrayBuffer, { to: 'string' })
-  return '111';
+  return inflate(arrayBuffer, { to: 'string' })
 }
 
 function calcParams(json: string, isLowPriority: boolean, framesCount: number) {
@@ -122,7 +114,6 @@ function calcParams(json: string, isLowPriority: boolean, framesCount: number) {
 async function renderFrames(
   key: string, frameIndex: number, onProgress: CancellableCallback,
 ) {
-  console.log('render');
   if (!rLottieApi) {
     await rLottieApiPromise;
   }
@@ -172,8 +163,8 @@ function destroy(key: string, isRepeated = false) {
 }
 
 createWorkerInterface({
-  // init,
-  // changeData,
-  // renderFrames,
-  // destroy,
+  init,
+  changeData,
+  renderFrames,
+  destroy,
 });

@@ -6,7 +6,7 @@ import {resolve} from "path";
 export default defineConfig({
   server: {
     host: true, // 监听所有地址
-    port: 8080
+    port: 8080,
   },
   plugins: [
     vue(),
@@ -20,9 +20,6 @@ export default defineConfig({
       }
     ],
     extensions: ['.js', '.ts', '.vue']
-  },
-  define: {
-    'process.env': {}
   },
   build: {
     outDir: 'build', // 打包文件的输出目录

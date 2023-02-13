@@ -1,16 +1,16 @@
-export const APP_NAME = process.env.APP_NAME || 'Telegram WebZ';
-export const APP_VERSION = process.env.APP_VERSION!;
-export const RELEASE_DATETIME = process.env.RELEASE_DATETIME;
+export const APP_NAME = import.meta.env.APP_NAME || 'Telegram WebZ';
+export const APP_VERSION = import.meta.env.APP_VERSION!;
+export const RELEASE_DATETIME = import.meta.env.RELEASE_DATETIME;
 
 export const PRODUCTION_HOSTNAME = 'web.telegram.org';
 
-export const DEBUG = process.env.APP_ENV !== 'production';
+export const DEBUG = import.meta.env.APP_ENV !== 'production';
 export const DEBUG_MORE = false;
 
-export const IS_MOCKED_CLIENT = process.env.APP_MOCKED_CLIENT === '1';
-export const IS_TEST = process.env.APP_ENV === 'test';
-export const IS_PERF = process.env.APP_ENV === 'perf';
-export const IS_BETA = process.env.APP_ENV === 'staging';
+export const IS_MOCKED_CLIENT = import.meta.env.APP_MOCKED_CLIENT === '1';
+export const IS_TEST = import.meta.env.APP_ENV === 'test';
+export const IS_PERF = import.meta.env.APP_ENV === 'perf';
+export const IS_BETA = import.meta.env.APP_ENV === 'staging';
 
 export const BETA_CHANGELOG_URL = 'https://telegra.ph/WebZ-Beta-04-01';
 

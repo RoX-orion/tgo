@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { ElMessageBox, ElMessage } from 'element-plus'
-import { getKey } from '@/util/localstorage';
+import { getKey } from '@/util/localstorage.ts';
 import { authToken } from '@/config';
 import {resetToken} from "@/util/auth.ts";
 
