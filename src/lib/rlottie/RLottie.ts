@@ -125,7 +125,6 @@ class RLottie {
     private onEnded?: (isDestroyed?: boolean) => void,
     private onLoop?: () => void,
   ) {
-    console.log("容器", container);
     this.addContainer(containerId, container, onLoad, params.coords);
     this.initConfig();
     this.initRenderer();
@@ -562,7 +561,6 @@ class RLottie {
 
   private requestFrame(frameIndex: number) {
     this.frames[frameIndex] = WAITING;
-
     workers[this.workerIndex].request({
       name: 'renderFrames',
       args: [this.id, frameIndex, this.onFrameLoad.bind(this)],

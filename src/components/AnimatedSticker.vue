@@ -1,12 +1,10 @@
 <template>
-<!--  <canvas ref="container"></canvas>-->
   <div ref="containerRLottie" class="test"></div>
 </template>
 
 <script setup lang="ts">
 import generateIdFor from '@/util/generateIdFor';
-import {onMounted, reactive, ref} from "vue";
-import {useRef} from "@/lib/Helpers";
+import {onMounted, onUnmounted, ref} from "vue";
 
 export type OwnProps = {
   animationId?: string;
@@ -22,7 +20,7 @@ export type OwnProps = {
   color?: [number, number, number];
   isLowPriority?: boolean;
   forceOnHeavyAnimation?: boolean;
-  sharedCanvas: HTMLCanvasElement;
+  sharedCanvas?: HTMLCanvasElement;
   sharedCanvasCoords?: { x: number; y: number };
   onClick?: NoneToVoidFunction;
   onLoad?: NoneToVoidFunction;
@@ -39,9 +37,10 @@ let container: HTMLDivElement
 const LOTTIE_LOAD_DELAY = 3000;
 const ID_STORE = {};
 
+let newAnimation: RLottieInstance;
+
 async function ensureLottie() {
   if (!lottiePromise) {
-    console.log("invoking");
     lottiePromise = import('@/lib/rlottie/RLottie') as unknown as Promise<RLottieClass>;
     RLottie = (await lottiePromise as any).default;
   }
@@ -50,7 +49,7 @@ async function ensureLottie() {
 }
 // setTimeout(ensureLottie, LOTTIE_LOAD_DELAY);
 // await ensureLottie();
-const containerId = () => generateIdFor(ID_STORE, true);
+const containerId = generateIdFor(ID_STORE, true);
 
 const prop = defineProps<OwnProps>();
 
@@ -59,6 +58,11 @@ let containerRLottie = ref<any>(null);
 onMounted(() => {
   container = containerRLottie.value;
   init(prop);
+});
+
+onUnmounted(() => {
+  console.log('containerId', containerId);
+  newAnimation.removeContainer(containerId);
 });
 
 const init = async ({
@@ -83,19 +87,12 @@ const init = async ({
    onLoop,
   }: OwnProps
 ) => {
-  // console.log(typeof containerRLottie);
-  // console.log(containerRLottie instanceof HTMLDivElement);
-  // console.log(containerRLottie);
-  // container = containerRef.current || sharedCanvas;
-  // if (!container) {
-  //   return;
-  // }
   if (!container) {
     return;
   }
   await ensureLottie();
-  const newAnimation = RLottie.init(
-    "containerId",
+  newAnimation = RLottie.init(
+    containerId,
     container,
     onLoad,
     animationId || generateIdFor(ID_STORE, true),
@@ -112,7 +109,6 @@ const init = async ({
     onLoop,
   );
   if (speed) {
-    console.log('placeholder', speed);
     newAnimation.setSpeed(speed);
   }
   newAnimation.play();

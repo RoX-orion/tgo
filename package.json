@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "make": "node src/lib/rlottie/make.js"
   },
   "dependencies": {
     "@types/pako": "^1.0.3",
