@@ -61,7 +61,6 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  console.log('containerId', containerId);
   newAnimation.removeContainer(containerId);
 });
 
